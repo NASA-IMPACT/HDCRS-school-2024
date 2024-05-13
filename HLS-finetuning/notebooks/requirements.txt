@@ -1,0 +1,15 @@
+joblib
+morecantile
+opencv-python
+huggingface_hub
+shapely
+geojson
+scipy
+Pillow==9.4.0
+numpy
+pydantic==1.10.11
+fastapi
+starlette
+uvicorn
+datasets
+huggingface
