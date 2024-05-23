@@ -1,8 +1,14 @@
 # Add here the pip packages you would like to install on this virtual environment / kernel
 pip
 huggingface_hub
-#mmsegmentation
-#mmengine
-mmcv-full
-mmsegmentation==0.30.0
+boto3
+joblib
+morecantile
+huggingface_hub
+shapely
+geojson
+Pillow==9.4.0
+datasets
+huggingface
+openmim
 git+https://github.com/NASA-IMPACT/hls-foundation-os.git
