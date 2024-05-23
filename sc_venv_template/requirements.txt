@@ -5,3 +5,4 @@ huggingface_hub
 #mmengine
 mmcv-full
 mmsegmentation==0.30.0
+git+https://github.com/NASA-IMPACT/hls-foundation-os.git
