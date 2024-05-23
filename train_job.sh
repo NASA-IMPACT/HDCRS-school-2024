@@ -4,10 +4,10 @@
 #SBATCH --ntasks=8
 #SBATCH --ntasks-per-node=4
 #SBATCH --account=training2411
-#SBATCH --output=output.out
-#SBATCH --error=error.err
+#SBATCH --output=output.out-%j
+#SBATCH --error=error.err-%j
 #SBATCH --time=2:00:00
-#SBATCH --job-name=<identifier>
+#SBATCH --job-name=Train_Prithvi
 #SBATCH --gres=gpu:4
 #SBATCH --partition=booster
 #SBATCH --gpus-per-node=4
