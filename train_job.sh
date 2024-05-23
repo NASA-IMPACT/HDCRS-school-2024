@@ -15,7 +15,7 @@
 #SBATCH --cpus-per-task=8
 
 PARTITION=training2411
-JOB_NAME=strube1
+JOB_NAME=${USER}
 GPUS=${GPUS:-8}
 GPUS_PER_NODE=${GPUS_PER_NODE:-4}
 SRUN_ARGS=${SRUN_ARGS:-""}
