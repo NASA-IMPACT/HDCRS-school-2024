@@ -4,30 +4,37 @@
 #SBATCH --ntasks=8
 #SBATCH --ntasks-per-node=4
 #SBATCH --account=training2411
-#SBATCH --output=output.out
-#SBATCH --error=error.er
+#SBATCH --output=output.out-%j
+#SBATCH --error=error.err-%j
 #SBATCH --time=2:00:00
-#SBATCH --job-name=<identifier>
+#SBATCH --job-name=Train_Prithvi
 #SBATCH --gres=gpu:4
-#SBATCH --partition=dc-gpu
+#SBATCH --partition=booster
 #SBATCH --gpus-per-node=4
 #SBATCH --hint=nomultithread
-
-set -x
+#SBATCH --cpus-per-task=8
 
 PARTITION=training2411
-JOB_NAME=<identifier>
+JOB_NAME=${USER}
 GPUS=${GPUS:-8}
 GPUS_PER_NODE=${GPUS_PER_NODE:-4}
 SRUN_ARGS=${SRUN_ARGS:-""}
 PY_ARGS=${@:4}
 
-module --force purge
+source sc_venv_template/activate.sh
 
-ml Stages/2023
-ml CUDA/11.7
+# Without this, srun does not inherit cpus-per-task from sbatch.
+export SRUN_CPUS_PER_TASK="$SLURM_CPUS_PER_TASK"
 
-source /p/project/training2411/<user>/miniconda/bin/activate py39
+# so processes know who to talk to
+MASTER_ADDR="$(scontrol show hostnames "$SLURM_JOB_NODELIST" | head -n 1)"
+# Allow communication over InfiniBand cells.
+MASTER_ADDR="${MASTER_ADDR}i"
+# Get IP for hostname.
+export MASTER_ADDR="$(nslookup "$MASTER_ADDR" | grep -oP '(?<=Address: ).*')"
+export MASTER_PORT=7010
+export GPUS_PER_NODE=4
+
 
 echo "Starting new training"
 
@@ -40,4 +47,4 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 srun -p ${PARTITION} \
     --ntasks-per-node=4 \
     --kill-on-bad-exit=1 \
     ${SRUN_ARGS} \
-    python -u train.py <config file path> --launcher="slurm" ${PY_ARGS}
+    python -u train.py configs/burn_scars_Prithvi_100M.py --launcher="slurm" ${PY_ARGS}
