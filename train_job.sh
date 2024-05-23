@@ -9,12 +9,12 @@
 #SBATCH --time=2:00:00
 #SBATCH --job-name=Train_Prithvi
 #SBATCH --gres=gpu:4
-#SBATCH --partition=booster
+#SBATCH --partition=dc-gpu
 #SBATCH --gpus-per-node=4
 #SBATCH --hint=nomultithread
 #SBATCH --cpus-per-task=8
 
-PARTITION=training2411
+PARTITION=dc-gpu
 JOB_NAME=${USER}
 GPUS=${GPUS:-8}
 GPUS_PER_NODE=${GPUS_PER_NODE:-4}
@@ -47,4 +47,4 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 srun -p ${PARTITION} \
     --ntasks-per-node=4 \
     --kill-on-bad-exit=1 \
     ${SRUN_ARGS} \
-    python -u train.py configs/burn_scars_Prithvi_100M.py --launcher="slurm" ${PY_ARGS}
+    python -u train.py configs/<configuration file> --launcher="slurm" ${PY_ARGS}
