@@ -1,6 +1,9 @@
 ## Prerequisites
 
-### High Performance Computing access
+### High Performance Computing (HPC) access
+
+#### Setup HPC environment:
+Please read through the details in the [Readme](../sc_venv_template/readme.md) to understand and setup the HPC environment for our hands-on session.
 
 ### Resources
 1. https://judoor.fz-juelich.de/
@@ -45,4 +48,3 @@ c. Paste `https://github.com/nasa-impact/HDCRS-school-2024.git` and Click on `Cl
 ![Cloned repository](../images/smd-hls-git-clone.png)
 ![Cloned repository](../images/smd-hls-cloned-content.png)
 ```
-
