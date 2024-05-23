@@ -30,6 +30,8 @@ to your needs.
 The file `requirements.txt` contains a list of packages to be installed during the setup process. Add required
 packages to this file to reproducibly add them to the venv.
 
+The file `symlink.sh` creates the required folders and symlinks.
+
 The script `setup.sh` creates the venv according to the config given in `config.sh`. Please **edit** this
 file to add a setup step for submodules (e.g. compilation of libraries). If only plain venvs are used, this file
 can remain unchanged. Note that the script *must* be ran at least once after the above configurations to actually create the environment.
