@@ -1,0 +1,7 @@
+# Add here the pip packages you would like to install on this virtual environment / kernel
+pip
+huggingface_hub
+#mmsegmentation
+#mmengine
+mmcv-full
+mmsegmentation==0.30.0
