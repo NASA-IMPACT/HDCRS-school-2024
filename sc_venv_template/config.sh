@@ -10,5 +10,5 @@ ABSOLUTE_PATH="$(realpath "${RELATIVE_PATH}")"
 ####################################
 
 ### User Configuration
-export ENV_NAME="$(basename "$ABSOLUTE_PATH")"             # Default Name of the venv is the directory that contains this file
+export ENV_NAME="HDCRS-school-2024"             # Default Name of the venv is the directory that contains this file
 export ENV_DIR="${ABSOLUTE_PATH}"/venv         # Default location of this VENV is "./venv"
