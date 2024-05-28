@@ -23,3 +23,6 @@ source "${ABSOLUTE_PATH}"/activate.sh
 python3 -m pip install --upgrade -r "${ABSOLUTE_PATH}"/requirements.txt
 mim install mmcv-full==1.6.2 -f https://download.openmmlab.com/mmcv/dist/cu115/torch1.11.0/index.html
 pip install git+https://github.com/NASA-IMPACT/hls-foundation-os.git
+
+source "${ABSOLUTE_PATH}"/create_kernel.sh
+source "${ABSOLUTE_PATH}"/create_python_for_vscode.sh
