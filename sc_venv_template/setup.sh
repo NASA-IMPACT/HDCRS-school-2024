@@ -5,6 +5,12 @@ SOURCE_PATH="${BASH_SOURCE[0]:-${(%):-%x}}"
 RELATIVE_PATH="$(dirname "$SOURCE_PATH")"
 ABSOLUTE_PATH="$(realpath "${RELATIVE_PATH}")"
 
+REPO_PATH=$PROJECT_training2411/$USER/HDCRS-school-2024
+
+mkdir $REPO_PATH/datasets
+mkdir $REPO_PATH/configs
+mkdir $REPO_PATH/models
+
 source "${ABSOLUTE_PATH}"/symlink.sh
 source "${ABSOLUTE_PATH}"/config.sh
 source "${ABSOLUTE_PATH}"/modules.sh
