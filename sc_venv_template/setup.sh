@@ -6,10 +6,11 @@ RELATIVE_PATH="$(dirname "$SOURCE_PATH")"
 ABSOLUTE_PATH="$(realpath "${RELATIVE_PATH}")"
 
 REPO_PATH=$PROJECT_training2411/$USER/HDCRS-school-2024
+FINETUNE_PATH=$REPO_PATH/HLS-finetuning/notebooks
 
-mkdir $REPO_PATH/datasets
-mkdir $REPO_PATH/configs
-mkdir $REPO_PATH/models
+mkdir $FINETUNE_PATH/datasets
+mkdir $FINETUNE_PATH/configs
+mkdir $FINETUNE_PATH/models
 
 source "${ABSOLUTE_PATH}"/symlink.sh
 source "${ABSOLUTE_PATH}"/config.sh
