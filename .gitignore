@@ -4,3 +4,5 @@ v1/*
 HLS-finetuning/notebooks/datasets
 HLS-finetuning/notebooks/models
 HLS-finetuning/notebooks/configs
+error.*
+output.*
