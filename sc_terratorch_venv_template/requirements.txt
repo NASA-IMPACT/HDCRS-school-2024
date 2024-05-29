@@ -1,0 +1,8 @@
+# Add here the pip packages you would like to install on this virtual environment / kernel
+pip
+boto3
+joblib
+morecantile
+shapely
+geojson
+terratorch
