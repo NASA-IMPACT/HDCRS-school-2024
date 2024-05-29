@@ -57,7 +57,7 @@ Please read through the details in the [Readme](../sc_venv_template/readme.md) t
 ![Run space](../images/updated-instance-config.png)
 
 ## HLS fine-tuning
-Harmonized Landsat and Sentinel - 2 (HLS) Foundation model (Prithvi) is currently available in Huggingface(https://huggingface.co/ibm-nasa-geospatial/Prithvi-100M). In this hands-on, finetuning will be done in the Julich Supercomputing Center (JSC). Please follow instructions listed in the [notebook](../HLS-finetuning/notebooks/hls-fm-finteuning.ipynb).
+Harmonized Landsat and Sentinel - 2 (HLS) Foundation model (Prithvi) is currently available in Huggingface(https://huggingface.co/ibm-nasa-geospatial/Prithvi-100M). In this hands-on, finetuning will be done in the Julich Supercomputing Center (JSC). Please follow instructions listed in the [notebook](../HLS-finetuning/notebooks/hls-fm-finetuning.ipynb).
 
 **Note: Before we start, please clone this repository in the JSC notebook environment.**
 
