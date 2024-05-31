@@ -13,3 +13,4 @@ starlette
 uvicorn
 datasets
 huggingface
+git+https://github.com/IBM/terratorch.git
