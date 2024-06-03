@@ -2,7 +2,7 @@
 
 ### High Performance Computing (HPC) access
 **Source: [User access](https://gist.github.com/stemauro/aca1e5339babe664169ac7126b2801ce)**
-These guidelines refer to the following notes: https://zhukov1.pages.jsc.fz-juelich.de/intro2sc-handson/docs/access.
+These guidelines refer to the following notes from a different course: https://zhukov1.pages.jsc.fz-juelich.de/intro2sc-handson/docs/access. Please note that the training project for this course is different (training2411). See below in this document for more details.
 
 Instructions to accomplish the following steps are explained in detail within different sections/subsections of the above notes. Please, refer to the section/subsection whose title is `<TITLE>` whenever you get to any of the following bullet point stating "*follow section/subsection `<TITLE>`*".
 
