@@ -1,0 +1,8 @@
+boto3
+starlette
+transformers
+bitsandbytes
+accelerate
+fastapi
+torch
+gunicorn
