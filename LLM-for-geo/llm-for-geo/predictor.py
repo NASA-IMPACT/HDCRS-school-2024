@@ -31,7 +31,7 @@ BNB_CONFIG = BitsAndBytesConfig(
 )
 
 PROMPT = """Today's date is May 30, 2024. you are given a string with information of an event with time and location. you should extract the information from the given text in json format as shown:
-{{"datetime": "", "location": ""}} 
+{{"datetime": "", "location": "", "error": ""}}
 
 here's the text: {text}
 json:
