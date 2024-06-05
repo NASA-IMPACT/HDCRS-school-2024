@@ -30,13 +30,6 @@ BNB_CONFIG = BitsAndBytesConfig(
     bnb_4bit_compute_dtype=torch.bfloat16,
 )
 
-PROMPT = """Today's date is May 30, 2024. you are given a string with information of an event with time and location. you should extract the information from the given text in json format as shown:
-{{"datetime": "", "location": "", "error": ""}}
-
-here's the text: {text}
-json:
-"""
-
 THRESHOLD = 0.17
 
 class Item(BaseModel):
@@ -154,7 +147,8 @@ def health():
 
 @app.post("/invocations")
 def infer(item: Item):
-    inputs = TOKENIZER(PROMPT.format(text=item.query), return_tensors="pt", return_attention_mask=False)
+    prompt = os.environ.get('PROMPT')
+    inputs = TOKENIZER(prompt.format(text=item.query), return_tensors="pt", return_attention_mask=False)
     outputs = MODEL.generate(**inputs, max_length=150)
     text = TOKENIZER.batch_decode(outputs)[0]
     response = text.split("json:")[-1]
