@@ -3,6 +3,7 @@ bitsandbytes
 boto3
 fastapi
 gunicorn
+opencage
 peft
 safetensors
 starlette
