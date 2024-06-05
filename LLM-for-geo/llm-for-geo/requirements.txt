@@ -1,8 +1,12 @@
-boto3
-starlette
-transformers
-bitsandbytes
 accelerate
+bitsandbytes
+boto3
 fastapi
-torch
 gunicorn
+peft
+safetensors
+starlette
+torch
+transformers
+uvicorn[standard]
+

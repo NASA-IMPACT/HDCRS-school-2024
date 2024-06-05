@@ -8,18 +8,18 @@ LABEL maintainer="NASA IMPACT"
 RUN apt-get update -y && \
     apt-get install -y software-properties-common && \
     apt-get install -y nginx && \
-    apt install -y python3.11-dev && \
+    apt install -y python-is-python3 && \
     apt-get install -y libgl1 python3-pip
 
 RUN rm -rf /var/lib/apt/lists/*
 
-RUN python3.11 -m pip install -U pip
+RUN python -m pip install -U pip
 
-RUN pip3 install --upgrade pip
+RUN pip install --upgrade pip
 
 COPY llm-for-geo/requirements.txt requirements.txt
 
-RUN pip3 install -r requirements.txt
+RUN pip install -r requirements.txt
 
 ENV CUDA_HOME=/usr/local/cuda
 
@@ -32,3 +32,4 @@ ENV PATH="/opt/program:${PATH}"
 COPY llm-for-geo /opt/program
 # Copies code under /opt/ml/code where sagemaker-containers expects to find the script to run
 WORKDIR /opt/program
+

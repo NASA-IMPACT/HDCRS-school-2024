@@ -47,10 +47,10 @@ def start_server():
     nginx = subprocess.Popen(['nginx', '-c', '/opt/program/nginx.conf'])
     gunicorn = subprocess.Popen(['gunicorn',
                                  '--timeout', str(model_server_timeout),
-                                 '-k', 'sync',
                                  '-b', 'unix:/tmp/gunicorn.sock',
-                                 '-w', str(model_server_workers),
-                                 'wsgi:app'])
+                                 '-w', '1',
+                                 '--worker-class', 'uvicorn.workers.UvicornWorker',
+                                 'predictor:app'])
 
     signal.signal(signal.SIGTERM, lambda a, b: sigterm_handler(nginx.pid, gunicorn.pid))
 
