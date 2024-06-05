@@ -9,6 +9,7 @@ import time
 from fastapi import FastAPI, Request
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
+from opencage.geocoder import OpenCageGeocode
 from peft import get_peft_model, LoraConfig
 from pydantic import BaseModel
 
@@ -36,6 +37,7 @@ here's the text: {text}
 json:
 """
 
+THRESHOLD = 0.17
 
 class Item(BaseModel):
     query: str
@@ -94,7 +96,7 @@ def download_lora():
     s3_connection.download_file(bucket_name, lora_filename, f"lora/{lora_filename}")
 
 
-def prepare_lora():
+def prepare_lora(model):
     model = prepare_base()
     download_lora()
     tokenizer = AutoTokenizer.from_pretrained('llama')
@@ -128,9 +130,23 @@ def prepare_lora():
                 ],
             )
     return get_peft_model(model, peft_config), tokenizer
-    
 
 MODEL, TOKENIZER = prepare_lora()
+
+def geocode(location: str) -> str:
+    """Geocode a query (location, region, or landmark)"""
+    opencage_geocoder = OpenCageGeocode(os.environ["OPENCAGE_API_KEY"])
+    response = opencage_geocoder.geocode(location, no_annotations="1")
+    if response:
+        bounds = response[0]["geometry"]
+
+        # convert to bbox
+        return [
+            bounds["lng"] - THRESHOLD,
+            bounds["lat"] - THRESHOLD,
+            bounds["lng"] + THRESHOLD,
+            bounds["lat"] + THRESHOLD,
+        ]
 
 @app.get("/ping", status_code=200)
 def health():
@@ -142,6 +158,11 @@ def infer(item: Item):
     outputs = MODEL.generate(**inputs, max_length=150)
     text = TOKENIZER.batch_decode(outputs)[0]
     response = text.split("json:")[-1]
-    print(response[:response.find("}") +1])
-    return JSONResponse({"models": response[:response.find("}") + 1]})
+    final_response = json.loads(response[:response.find("}") +1])
+    bounding_box = geocode(final_response['location'])
 
+    return JSONResponse({
+        'bounding_box': bounding_box,
+        'location': final_response['location'],
+        'date': final_response['datetime'].split('T')[0]
+    })
