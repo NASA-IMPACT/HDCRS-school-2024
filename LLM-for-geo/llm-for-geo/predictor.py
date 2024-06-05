@@ -96,7 +96,7 @@ def download_lora():
     s3_connection.download_file(bucket_name, lora_filename, f"lora/{lora_filename}")
 
 
-def prepare_lora(model):
+def prepare_lora():
     model = prepare_base()
     download_lora()
     tokenizer = AutoTokenizer.from_pretrained('llama')
