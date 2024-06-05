@@ -152,6 +152,7 @@ def infer(item: Item):
     outputs = MODEL.generate(**inputs, max_length=150)
     text = TOKENIZER.batch_decode(outputs)[0]
     response = text.split("json:")[-1]
+    print('####', response)
     final_response = json.loads(response[:response.find("}") +1])
     bounding_box = geocode(final_response['location'])
 
