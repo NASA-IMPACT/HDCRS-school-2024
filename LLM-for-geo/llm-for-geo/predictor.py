@@ -19,7 +19,8 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
 
 BUCKET_NAME = 'workhsop-llama-weights'
-LORA_FILENAME = 'lora_tensors.safetensors'
+LORA_FILENAME = 'adapter_model.safetensors'
+LORA_CONFIG = 'adapter_config.json'
 
 torch.set_default_device("cuda")
 
@@ -82,11 +83,13 @@ def download_lora():
     session = assumed_role_session()
     bucket_name = os.environ.get('BUCKET_NAME', BUCKET_NAME)
     lora_filename = os.environ.get('LORA_FILENAME', LORA_FILENAME) 
+    lora_config = os.environ.get('LORA_CONFIG', LORA_CONFIG)
     s3_connection = session.client('s3')
     if not(os.path.exists('lora')):
         os.mkdir('lora')
     print(bucket_name, lora_filename)
     s3_connection.download_file(bucket_name, lora_filename, f"lora/{lora_filename}")
+    s3_connection.download_file(bucket_name, lora_config, f"lora/{lora_config}")
 
 
 def prepare_lora():
@@ -97,31 +100,23 @@ def prepare_lora():
 
     tensors = {}
     lora_filename = os.getenv('LORA_FILENAME', LORA_FILENAME)
+    lora_config_filename = os.getenv('LORA_CONFIG', LORA_CONFIG)
+
     with safe_open(f"lora/{lora_filename}", framework="pt", device=0) as f:
         for k in f.keys():
             tensors[k] = f.get_tensor(k)
+
+    with open(lora_config_filename, "r") as f:
+        lora_config = json.load(f)
+
+    peft_config = LoraConfig(**lora_config)
+
     for k in llama_peft_sd:
-        if 'lora' in k:
-            llama_peft_sd[k] = tensors[k]
+        if "lora" in k and any(module in k for module in peft_config.target_modules):
+            llama_peft_sd[k] = tensors[k[:-14]+k[-6:]]
 
     model.load_state_dict(llama_peft_sd)
-    peft_config = LoraConfig(
-                task_type="CAUSAL_LM", 
-                inference_mode=True,
-                r=64,
-                lora_alpha=16,
-                lora_dropout=0.1,
-                target_modules=[
-                    "q_proj",
-                    "k_proj",
-                    "v_proj",
-                    "o_proj",
-                    "gate_proj",
-                    "up_proj",
-                    "down_proj",
-                    "lm_head",
-                ],
-            )
+
     return get_peft_model(model, peft_config), tokenizer
 
 MODEL, TOKENIZER = prepare_lora()
