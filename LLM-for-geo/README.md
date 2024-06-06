@@ -44,7 +44,12 @@ else, clone the repo:
 
 5. Steps for Decoder Finetuning:
 
-```git clone git@github.com:meta-llama/llama-recipes.git
-cd llama-recipes
-pip install -U pip setuptools
-pip install -e .
+From a terminal: (with pwd as LLM-for-geo)
+    1. Activate your HDCRS environment
+
+    ```git clone https://github.com/meta-llama/llama-recipes.git
+    cd llama-recipes
+    pip install -U pip setuptools
+    pip install -e .
+
+    2. modify decoder-ft.sh file -> 
