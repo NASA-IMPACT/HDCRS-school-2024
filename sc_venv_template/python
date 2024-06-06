@@ -1,0 +1,6 @@
+#!/bin/bash
+module purge 2> /dev/null
+deactivate 2> /dev/null
+source '/p/project/training2411/kumar/HDCRS-school-2024/sc_venv_template'/activate.sh
+python "$@"
+
