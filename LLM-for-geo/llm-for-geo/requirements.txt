@@ -1,0 +1,12 @@
+accelerate
+bitsandbytes
+boto3
+fastapi
+gunicorn
+opencage
+peft
+safetensors
+starlette
+torch
+transformers
+uvicorn[standard]
