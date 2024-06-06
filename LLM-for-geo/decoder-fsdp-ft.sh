@@ -25,7 +25,7 @@ module --force purge
 ml Stages/2024
 ml CUDA
 
-source /p/project/training2411/kumar/HDCRS-school-2024/.venv/bin/activate
+source /p/project/training2411/kumar/miniconda/bin/activate peft
 
 echo "Starting LLM peftraining"
 
