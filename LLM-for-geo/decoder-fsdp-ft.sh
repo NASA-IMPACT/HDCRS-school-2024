@@ -25,7 +25,7 @@ module --force purge
 ml Stages/2024
 ml CUDA
 
-source /p/project/training2411/ramasubramanian1/HDCRS-school-2024/sc_venv_template/venv/activate.sh
+source /p/project/training2411/kumar/HDCRS-school-2024/.venv/bin/activate
 
 echo "Starting LLM peftraining"
 
@@ -62,7 +62,7 @@ export PYTHONFAULTHANDLER=1
 
 export CUDA_LAUNCH_BLOCKING=0
 export TOKENIZERS_PARALLELISM=false
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/p/project/training2411/ramasubramanian1/HDCRS-school-2024/sc_venv_template/venv/lib/
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/p/project/training2411/ramasubramanian1/HDCRS-school-2024/sc_venv_template/venv/lib/
 
 # echo "Using torch from $(python -c 'import torch; print(torch.__file__)')"
 # echo "Using torch cuda from $(python -c 'import torch; print(torch.version.cuda)')"

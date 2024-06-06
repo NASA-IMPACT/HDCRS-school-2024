@@ -6,3 +6,4 @@ HLS-finetuning/notebooks/models
 HLS-finetuning/notebooks/configs
 error.*
 output.*
+.venv/*

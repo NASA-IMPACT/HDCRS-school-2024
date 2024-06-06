@@ -18,7 +18,19 @@ Finally, Agentic workflows are discussed briefly, with a demo.
 This part covers how the LLM models are deployed on AWS environment and is used for inference
 
 
-# Getting Started
+## Getting Started: AWS
+
+1. Login to AWS account.
+
+2. Go To Sagemaker > create Jupyterlab instance
+
+3. Open the terminal, and clone the repo
+`git clone https://github.com/NASA-IMPACT/HDCRS-school-2024.git`
+
+4. navigate to downloaded repo and follow encoder-ner.ipynb
+
+
+## Getting Started: JSC
 
 1. Clone the repo within your environment.
 
@@ -47,7 +59,10 @@ else, clone the repo:
 From a terminal: (with pwd as LLM-for-geo)
     1. Activate your HDCRS environment
 
-    ```git clone https://github.com/meta-llama/llama-recipes.git
+    ```module --force purge
+    ml Stages/2024
+    ml CUDA
+    git clone https://github.com/meta-llama/llama-recipes.git
     cd llama-recipes
     pip install -U pip setuptools
     pip install -e .
