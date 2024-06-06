@@ -33,7 +33,6 @@ export WORLD_SIZE=$(($SLURM_JOB_NUM_NODES * $SLURM_GPUS_PER_NODE))
 export SRUN_CPUS_PER_TASK=12
 MASTER_ADDR="$(scontrol show hostnames "$SLURM_JOB_NODELIST" | head -n 1)"
 MASTER_ADDR="${MASTER_ADDR}i" # Assuming you want to append 'i' to the hostname.
-export MASTER_ADDR
 export MASTER_PORT=5557
 export GPUS_PER_NODE=4
 
@@ -73,4 +72,4 @@ GLOBAL_BATCH_SIZE=64
 MAX_BATCH_SIZE=8
 GRAD_ACCUM_STEPS=1
 
-srun torchrun --nnodes 1 --nproc_per_node 4 --rdzv_id $RANDOM --rdzv_backend c10d --rdzv_endpoint localhost:0 llama-recipes/recipes/finetuning/finetuning.py --model_name /p/project/training2411/kumar/meta-llama/Llama-2-7b-chat-hf --dataset "custom_dataset" --custom_dataset.file "/p/project/training2411/kumar/HDCRS-school-2024/LLM-for-geo/custom_dataset.py" --enable_fsdp --use_peft --peft_method lora --output_dir output_dir --batching-strategy padding
+srun torchrun --nnodes 1 --nproc_per_node 4 --rdzv_id $RANDOM --rdzv_backend c10d --rdzv_endpoint localhost:0 /p/project/training2411/kumar/llama-recipes/recipes/finetuning/finetuning.py --model_name /p/project/training2411/kumar/meta-llama/Llama-2-7b-chat-hf --dataset "custom_dataset" --custom_dataset.file "/p/project/training2411/kumar/HDCRS-school-2024/LLM-for-geo/custom_dataset.py" --enable_fsdp --use_peft --peft_method lora --output_dir output_dir --batching-strategy padding  --run_validation false --batch_size_training 17
