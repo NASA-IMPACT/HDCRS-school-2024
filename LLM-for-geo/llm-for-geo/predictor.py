@@ -106,7 +106,7 @@ def prepare_lora():
         for k in f.keys():
             tensors[k] = f.get_tensor(k)
 
-    with open(lora_config_filename, "r") as f:
+    with open(f"lora/{lora_config_filename}", "r") as f:
         lora_config = json.load(f)
 
     peft_config = LoraConfig(**lora_config)
